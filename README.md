@@ -32,7 +32,6 @@ The packages used include:
 - Numpy
 - Scikit Learn
 - Spotipy
-- Category Encoder
 - Flask
 
 ### Features
