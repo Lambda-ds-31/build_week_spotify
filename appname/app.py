@@ -30,7 +30,7 @@ def create_app():
         descriptive information """
 
         rs = sp.track(id)
-        print(json.dumps(rs, indent=4))
+        # print(json.dumps(rs, indent=4))
 
         importante = {
             'name': rs['name'],
@@ -38,7 +38,8 @@ def create_app():
             'album': rs['album']['name'],
             'imageurl': rs['album']['images'][2]['url'],
             'release': rs['album']['release_date'],
-            'url': rs['external_urls']['spotify'],
+            'track_url': rs['external_urls']['spotify'],
+            'album_url': rs['album']['external_urls']['spotify'],
             'id': rs['id']}
 
         # name = attributes['name']
@@ -59,14 +60,16 @@ def create_app():
 
     def track_features(id):
         """ takes a track id and returns a dictionary with its features """
-        dict = sp.audio_features(id)[0]
+        dicty = sp.audio_features(id)[0]
 
         drops = ['key', 'mode', 'type', 'id',
         'uri', 'track_href', 'analysis_url',
         'time_signature']
 
         for drop in drops:
-            del dict[drop]
+            dicty.pop(drop)
+
+        return dicty
 
     @app.route('/', methods=['GET', "POST"])
     def root():
@@ -79,6 +82,7 @@ def create_app():
             id = sp.search(name, type='track', limit=1)['tracks']['items'][0]['id']
 
             recs = find_knn(id, pred_df) # pass the id to Xianshi's function
+            # print(recs)
 
             named_recs = []
             for rec in recs:
@@ -86,13 +90,18 @@ def create_app():
 
             tracks_atts = track_features(id)
         else:
-            named_recs = None
-            tracks_atts = []
+            named_recs = []
+            tracks_atts = {}
+
+        attributes = []
+        for attr, value in tracks_atts.items():
+            text = f'{attr}: {value}'
+            attributes.append(text)
+
 
         return render_template('home.html',
-            title = 'Home',
             recs = named_recs,
-            track_atts = tracks_atts
+            track_atts = attributes
         )
 
     return app
