@@ -6,6 +6,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 import pandas as pd
 from .predict import find_knn
+import os
+import json
 
 
 def create_app():
@@ -17,7 +19,7 @@ def create_app():
     api_key = os.getenv("CLIENT_ID")
     secret_key = os.getenv("CLIENT_ID_SECRET")
 
-    pred_df = pd.read_csv('SpotifyFeatures.csv', index_col='track_it')
+    pred_df = pd.read_csv('SpotifyFeatures.csv', index_col='track_id')
     pred_df.drop(columns= ['genre', 'key', 'mode', 'time_signature'], inplace = True)
 
     manager = SpotifyClientCredentials(client_id=api_key, client_secret=secret_key)
@@ -27,21 +29,33 @@ def create_app():
         """ takes a track id and returns dictionary with
         descriptive information """
 
-        attributes = sp.track(id)
+        rs = sp.track(id)
+        print(json.dumps(rs, indent=4))
 
-        name = attributes['name']
-        artist = attributes['artists']['name']
-        album = attributes['album']['name']
-        album_url = attributes['album']['external_urls']['spotify']
-        track_url = attributesttributes['external_urls']['spotify']
+        importante = {
+            'name': rs['name'],
+            'artist': rs['album']['artists'][0]['name'],
+            'album': rs['album']['name'],
+            'imageurl': rs['album']['images'][2]['url'],
+            'release': rs['album']['release_date'],
+            'url': rs['external_urls']['spotify'],
+            'id': rs['id']}
 
-        description = {
-            'name': name,
-            'artist': artist,
-            'album': album,
-            'album_url': album_url,
-            'track_url': track_url
-            }
+        # name = attributes['name']
+        # artist = attributes['artists']['name']
+        # album = attributes['album']['name']
+        # album_url = attributes['album']['external_urls']['spotify']
+        # track_url = attributesttributes['external_urls']['spotify']
+
+        # description = {
+        #     'name': name,
+        #     'artist': artist,
+        #     'album': album,
+        #     'album_url': album_url,
+        #     'track_url': track_url
+        #     }
+
+        return importante
 
     def track_features(id):
         """ takes a track id and returns a dictionary with its features """
@@ -58,20 +72,27 @@ def create_app():
     def root():
         """ Base page """
 
-         name = request.form.get('name')# name can be multiple terms
+        name = request.form.get('name')# name can be multiple terms
 
-         # gets the id of the top search result
-         id = sp.search(name, type='track', limit=1)['tracks']['items'][0]['id']
+        # gets the id of the top search result
+        if name:
+            id = sp.search(name, type='track', limit=1)['tracks']['items'][0]['id']
 
-         recs = find_knn(id, pred_df) # pass the id to Xianshi's function
+            recs = find_knn(id, pred_df) # pass the id to Xianshi's function
 
-         named_recs = []
-         for rec in recs:
-             named_recs.append(describe_track(rec))
+            named_recs = []
+            for rec in recs:
+                named_recs.append(describe_track(rec))
 
-        tracks_atts = track_features(id)
+            tracks_atts = track_features(id)
+        else:
+            named_recs = None
+            tracks_atts = []
 
-         return render_template('home.html',
+        return render_template('home.html',
             title = 'Home',
             recs = named_recs,
-            track_atts = tracks_atts)
+            track_atts = tracks_atts
+        )
+
+    return app
