@@ -2,26 +2,27 @@
 
     <head>
         <title>Home</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     </head>
 
     <body>
 
-    <h2>Enter Song name</h2>
-    <form method="POST" action="/">
-      <input type="text" name="name">
-      <input type="submit" value="Search">
-    </form>
+        <h2>Enter Song name</h2>
+        <form method="POST" action="/">
+        <input type="text" name="name">
+        <input type="submit" value="Search">
+        </form>
 
-    {% for attr in track_atts %}
-    <p>{{ attr }}</p>
-    {% endfor %}
-
-    <h3>Recommendations</h3>
-    <ul>
-        {% for track in recs %}
-        <li><a href="{{track['track_url']}}">{{track['name']}}</a> by {{track['artist']}}</li>
+        {% for attr in track_atts %}
+        <p>{{ attr }}</p>
         {% endfor %}
-    </ul>
+
+        <h3>Recommendations</h3>
+        <ul>
+            {% for track in recs %}
+            <li><a href="{{track['track_url']}}">{{track['name']}}</a> by {{track['artist']}}</li>
+            {% endfor %}
+        </ul>
 
     </body>
 
