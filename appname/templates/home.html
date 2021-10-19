@@ -7,22 +7,31 @@
 
     <body>
 
-        <h2>Enter Song name</h2>
-        <form method="POST" action="/">
-        <input type="text" name="name">
-        <input type="submit" value="Search">
-        </form>
+        <div class="split left">
+            <h2>Enter Song Name</h2>
+            <form method="POST" action="/">
+                <input type="text" name="name">
+                <input type="submit" value="Search">
+            </form>
 
-        {% for attr in track_atts %}
-        <p>{{ attr }}</p>
-        {% endfor %}
+            {% if search %}
+                <img src="{{sres['imageurl']}}" alt="album thumbnail">
+                <h3><a href="{{sres['track_url']}}">{{sres['name']}}</a> by {{sres['artist']}}</h3>
+                <h4><a href="{{sres['album_url']}}">{{sres['album']}}</a>, {{sres['release']}}</h4>
+                {% for attr in track_atts %}
+                <p>{{ attr }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
 
-        <h3>Recommendations</h3>
-        <ul>
-            {% for track in recs %}
-            <li><a href="{{track['track_url']}}">{{track['name']}}</a> by {{track['artist']}}</li>
-            {% endfor %}
-        </ul>
+        <div class="split right">
+            <h3>Recommendations</h3>
+            <ul>
+                {% for track in recs %}
+                <li><a href="{{track['track_url']}}">{{track['name']}}</a> by {{track['artist']}}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
     </body>
 

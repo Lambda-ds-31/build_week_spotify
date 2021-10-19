@@ -88,8 +88,12 @@ def create_app():
             for rec in recs:
                 named_recs.append(describe_track(rec))
 
+            search_results = describe_track(id)
             tracks_atts = track_features(id)
+            search = True
         else:
+            search = None
+            search_results = None
             named_recs = []
             tracks_atts = {}
 
@@ -100,6 +104,8 @@ def create_app():
 
 
         return render_template('home.html',
+            search = search,
+            sres = search_results,
             recs = named_recs,
             track_atts = attributes
         )
