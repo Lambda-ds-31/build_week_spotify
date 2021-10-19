@@ -5,7 +5,7 @@ from flask import request
 from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 import pandas as pd
-from .recommeder import find_knn
+from .predict import find_knn
 
 
 def create_app():
