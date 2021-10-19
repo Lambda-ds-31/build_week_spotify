@@ -14,8 +14,11 @@ def create_app():
 
     app = Flask(__name__)
 
-    api_key = os.getenv("api_key")
-    secret_key = os.getenv("secret_key")
+    api_key = os.getenv("CLIENT_ID")
+    secret_key = os.getenv("CLIENT_ID_SECRET")
+
+    pred_df = pd.read_csv('SpotifyFeatures.csv', index_col='track_it')
+    pred_df.drop(columns= ['genre', 'key', 'mode', 'time_signature'], inplace = True)
 
     manager = SpotifyClientCredentials(client_id=api_key, client_secret=secret_key)
     sp = spotipy.Spotify(client_credentials_manager=manager)
@@ -60,7 +63,7 @@ def create_app():
          # gets the id of the top search result
          id = sp.search(name, type='track', limit=1)['tracks']['items'][0]['id']
 
-         recs = find_knn(id) # pass the id to Xianshi's function
+         recs = find_knn(id, pred_df) # pass the id to Xianshi's function
 
          named_recs = []
          for rec in recs:
