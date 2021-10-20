@@ -77,9 +77,10 @@ def create_app():
         """ Base page """
 
         name = request.form.get('name')# name can be multiple terms
+        error = None
 
         # gets the id of the top search result
-        if name:
+        try:
             id = sp.search(name, type='track', limit=1)['tracks']['items'][0]['id']
 
             recs = find_knn(id, pred_df) # pass the id to Xianshi's function
@@ -92,11 +93,14 @@ def create_app():
             search_results = describe_track(id)
             tracks_atts = track_features(id)
             search = True
-        else:
+        except:
             search = None
             search_results = None
             named_recs = []
             tracks_atts = {}
+
+            if name:
+                error = True
 
         attributes = []
         for attr, value in tracks_atts.items():
@@ -108,7 +112,8 @@ def create_app():
             search = search,
             sres = search_results,
             recs = named_recs,
-            track_atts = attributes
+            track_atts = attributes,
+            error = error
         )
 
     return app

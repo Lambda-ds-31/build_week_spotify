@@ -14,10 +14,14 @@
                 <input type="submit" value="Search">
             </form>
 
+            {% if error %}
+                <h4 style="color:red;">Invalid Song</h4>
+            {% endif %}
+
             {% if search %}
                 <img src="{{sres['imageurl']}}" alt="album thumbnail">
-                <h3><a href="{{sres['track_url']}}">{{sres['name']}}</a> by {{sres['artist']}}</h3>
-                <h4><a href="{{sres['album_url']}}">{{sres['album']}}</a>, {{sres['release']}}</h4>
+                <h3><a href="{{sres['track_url']}}" target="_blank">{{sres['name']}}</a> by {{sres['artist']}}</h3>
+                <h4><a href="{{sres['album_url']}}" target="_blank">{{sres['album']}}</a>, {{sres['release']}}</h4>
                 {% for attr in track_atts %}
                 <p>{{ attr }}</p>
                 {% endfor %}
@@ -25,12 +29,17 @@
         </div>
 
         <div class="split right">
-            <h3>Recommendations</h3>
-            <ul>
-                {% for track in recs %}
-                <li><a href="{{track['track_url']}}">{{track['name']}}</a> by {{track['artist']}}</li>
-                {% endfor %}
-            </ul>
+            {% if search %}
+                <h3>Recommendations</h3>
+                <ul>
+                    {% for track in recs %}
+                    <li><a href="{{track['track_url']}}" target="_blank">{{track['name']}}</a> by {{track['artist']}}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>Feedback</h3>
+                <p>We would love to hear your feedback! Please fill out <a href="https://forms.gle/TFEuZWw5LDNzeXSw7" target="_blank">this form</a> to let us know how we did!</p>
+            {% endif %}
         </div>
 
     </body>
