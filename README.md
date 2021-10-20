@@ -37,8 +37,8 @@ The packages used include:
 - [Pandas](https://pandas.pydata.org/)
 - [Numpy](https://numpy.org/doc/stable/index.html)
 - [Scikit Learn](https://scikit-learn.org/stable/)
-- [Spotipy] (https://spotipy.readthedocs.io/en/2.19.0/)
-- [Flask] (https://flask.palletsprojects.com/en/2.0.x/)
+- [Spotipy](https://spotipy.readthedocs.io/en/2.19.0/)
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 
 #### Features
 
