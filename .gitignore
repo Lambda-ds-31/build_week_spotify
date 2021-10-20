@@ -6,3 +6,4 @@ update_data.ipynb
 .ipynb_checkpoints
 .virtual_documents
 __pycache__
+.cache
