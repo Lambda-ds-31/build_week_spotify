@@ -21,6 +21,7 @@ def create_app():
 
     pred_df = pd.read_csv('SpotifyFeatures.csv', index_col='track_id')
     pred_df.drop(columns= ['genre', 'key', 'mode', 'time_signature'], inplace = True)
+    pred_df['duration_ms'] = pred_df['duration_ms']/pred_df['duration_ms'].max()
 
     manager = SpotifyClientCredentials(client_id=api_key, client_secret=secret_key)
     sp = spotipy.Spotify(client_credentials_manager=manager)
