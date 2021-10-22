@@ -2,9 +2,9 @@
 
 Lambda School - DS UNIT 3 Build Week Project
 
-This application predicts which songs are most similar to an user input song title. Using the Spotify API, various features of the song input are analyzed using a k-1 next nearest neighbor analysis of the audio features. 
+This application predicts which songs are most similar to an user input song title. Using the Spotify API, various features of the song input are analyzed using a k-1 next nearest neighbor analysis of the audio features.
 
-The goal of this project is to provide users with the ability to discover new music according to their favorite songs through the analysis of various features of the songs. 
+The goal of this project is to provide users with the ability to discover new music according to their favorite songs through the analysis of various features of the songs.
 
 ## Build Status
 
@@ -12,7 +12,7 @@ Currently in development.
 
 ## Interface
 
-Follow this link to see it in action: 
+Follow this link to see it in action:
 [Spotify Song Selector](https://radiant-scrubland-11374.herokuapp.com/)
 
 #### Landing Page
@@ -24,7 +24,7 @@ Users input a song title into the query.
 
 #### Results Page
 
-Users song query result is displayed to the left of the page and five recommended songs, based on analysis of the query features, are presented as a list to the right. The links from the songs open spotify to play each song. 
+Users song query result is displayed to the left of the page and five recommended songs, based on analysis of the query features, are presented as a list to the right. The links from the songs open spotify to play each song.
 
 <img width="878" alt="initial screenshot 2" src="https://user-images.githubusercontent.com/86363828/138159444-25c842fd-06ea-452f-9756-d44cedaa0f70.png">
 
@@ -33,7 +33,7 @@ Users song query result is displayed to the left of the page and five recommende
 
 #### Built with
 The languages used for this project include:
-- [Python](https://www.python.org/) 
+- [Python](https://www.python.org/)
 - HTML/CSS
 
 The packages used include:
@@ -45,11 +45,11 @@ The packages used include:
 
 #### Features
 
-The application uses Flask to power the search query/input. From the user input, the song title is passed through Spotipy's search functionality and generates the track_id and audio features. These features are then passed through the predict.py file which uses a K-1 Nearest Neighbors model to predict the songs whose features most closely resemble the input track. The track id's of the recommended songs are brought back through the front end and presented to the User as a list of songs with links to open the songs in Spotify. 
+The application uses Flask to power the search query/input. From the user input, the song title is passed through Spotipy's search functionality and generates the track_id and audio features. These features are then passed through the predict.py file which uses a K-1 Nearest Neighbors model to predict the songs whose features most closely resemble the input track. The track id's of the recommended songs are brought back through the front end and presented to the User as a list of songs with links to open the songs in Spotify.
 
 #### API Reference
 [Spotify](https://developer.spotify.com/documentation/web-api/)\
-Authentication and client credentials are required to access this application. An .env file is with "CLIENT_ID" and "CLIENT_SECRET" variables is required for use. 
+Authentication and client credentials are required to access this application. An .env file is with "CLIENT_ID" and "CLIENT_SECRET" variables is required for use.
 
 ## Contribute
 
@@ -73,4 +73,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
