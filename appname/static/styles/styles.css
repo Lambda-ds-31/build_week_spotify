@@ -24,6 +24,24 @@ body {
     right: 0px;
 }
 
+@media screen and (max-width: 800px) {
+    .left, .right {
+        left: auto;
+        right: auto;
+        padding-left: 50px;
+    }
+
+    .split {
+        height: auto;
+        width: auto;
+        position: static;
+        z-index: auto;
+        top: auto;
+        overflow-x: visible;
+        /* padding-top: 0px; */
+    }
+  }
+
 a {
     color:#1DB954;
 }
