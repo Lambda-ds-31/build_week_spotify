@@ -19,14 +19,13 @@ Follow this link to see it in action:
 
 Users input a song title into the query.
 
-<img width="734" alt="initiial screenshot" src="https://user-images.githubusercontent.com/86363828/138159433-9687f67a-3891-4fc0-b3eb-a57a505f74ed.png">
-
+![Screenshot 2021-10-22 121705 update - landing](https://user-images.githubusercontent.com/86363828/138489217-07cec950-1ae6-4b17-bee8-a5739c241b95.png)
 
 #### Results Page
 
 Users song query result is displayed to the left of the page and five recommended songs, based on analysis of the query features, are presented as a list to the right. The links from the songs open spotify to play each song.
 
-<img width="878" alt="initial screenshot 2" src="https://user-images.githubusercontent.com/86363828/138159444-25c842fd-06ea-452f-9756-d44cedaa0f70.png">
+![Screenshot 2021-10-22 121624 update](https://user-images.githubusercontent.com/86363828/138489195-49ad4d73-6885-459c-b4b3-cb3a4eadb213.png)
 
 
 ## Usage
